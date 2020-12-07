@@ -20,8 +20,11 @@ class Rectangle:
         return (self.width ** 2 + self.height ** 2) ** 0.5
 
     def get_picture(self):
-        range1 = self.width
-        range2 = self.height
+        range1 = self.height
+        range2 = self.width
+
+        result_picture=''
+
 
         if(range1>50 or range2>50):
             return "Too big for picture."
@@ -31,16 +34,26 @@ class Rectangle:
 
         else:
             for i in range(range1):
-                if(i==0):
-                    pass
-                else:
-                    print('')
-                for j in range(range2):
-                    print('*',end='')
+                    result_picture +=('*'*range2) + '\n'
+
+            return result_picture
+
 
     def __str__(self):
         result = 'Rectangle(width={0}, height={1})'.format(self.width,self.height)
         return result
+
+    def get_amount_inside(self,shape):
+        initial_result = self.get_area()
+        shape_result = shape.get_area()
+        time = 0
+        while shape_result<=initial_result:
+            initial_result -= shape_result
+            time +=1
+
+        return time
+
+
 
 class Square(Rectangle):
     def __init__(self,side):
@@ -48,7 +61,18 @@ class Square(Rectangle):
         self.height = side
 
     def set_side(self,side):
-        self.width = width
+        self.width = side
+        self.height = side
+
+    def __str__(self):
+        result = 'Square(side={0})'.format(self.width)
+        return result
+
+
+cla = Rectangle(8,5)
+print(cla.get_picture())
+
+
 
 
 
