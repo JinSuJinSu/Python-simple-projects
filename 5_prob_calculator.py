@@ -62,6 +62,8 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
         if(color_count==len(expected_balls)):
             ball_count+=1
 
+    #calculate probability
+
     return ball_count/num_experiments
 
 
