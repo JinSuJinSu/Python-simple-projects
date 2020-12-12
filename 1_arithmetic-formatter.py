@@ -1,5 +1,7 @@
 def arithmetic_arranger(problems,display=False):
 
+    #create all variable for coding
+
     operators = []
     dashes = []
     list1 = []
@@ -11,9 +13,13 @@ def arithmetic_arranger(problems,display=False):
 
     list1_length = 0
     list2_length = 0
+
+    #when the length is long.
     
     if len(problems)>5:
         return 'Error: Too many problems.'
+
+    #when the length is within the limit.
 
     for problem in range(len(problems)):
         if '+' in problems[problem] or '-' in problems[problem]:
@@ -21,6 +27,8 @@ def arithmetic_arranger(problems,display=False):
             list1.append(problems[problem][0])
             operators.append(problems[problem][1])
             list2.append(problems[problem][2])
+
+            # if the number's conditions are not correct, return below errors.
 
             if problems[problem][0].isdigit() == False or problems[problem][2].isdigit() == False:
                 return 'Error: Numbers must only contain digits.'
