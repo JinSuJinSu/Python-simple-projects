@@ -39,6 +39,9 @@ def arithmetic_arranger(problems,display=False):
         else:
             return "Error: Operator must be '+' or '-'."
 
+
+    # + and - operations condition
+
     for operator in range(len(operators)):
         if '+' in operators[operator]:
             result = int(list1[operator]) + int(list2[operator])
@@ -51,6 +54,8 @@ def arithmetic_arranger(problems,display=False):
         else:
             pass
 
+
+    # create spaces and results 
 
     for problem in range(len(problems)):
         width = max(len(list1[problem]),len(list2[problem]))+2
@@ -66,6 +71,7 @@ def arithmetic_arranger(problems,display=False):
             new_list2.append('    ' + (operators[problem] + ' '*(width-len(list2[problem])-1)+list2[problem]))
             new_results.append('    ' +(' '*(width-len(results[problem]))+results[problem]))
 
+    # finish this code and return result
     if display == True:
         arranged_problems = ''.join(new_list1) + '\n' + ''.join(new_list2) + '\n' + ''.join(dashes) + '\n' + ''.join(new_results)
 
