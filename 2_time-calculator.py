@@ -69,7 +69,7 @@ def add_time(start, duration, weekday=False):
 
         return num
 
-
+    #AM calculation
 
     if 'AM' in start:
         if result_hour<48:
