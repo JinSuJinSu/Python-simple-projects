@@ -38,6 +38,7 @@ def add_time(start, duration, weekday=False):
         weekday_position = weekday_list.index(weekday)
 
 
+    # add 1 hour when the minute is more than 60
 
     if int(result_minute) >=60:
         result_minute = str(int(result_minute) -60)
@@ -53,6 +54,7 @@ def add_time(start, duration, weekday=False):
     else:
         pass
         
+    # create weekday_calculation function and calculate total time and weekday
 
     final_weekday_position = 0
 
@@ -171,7 +173,7 @@ def add_time(start, duration, weekday=False):
                 else:
                     pass
 
-
+    #PM calculation
     elif 'PM' in start:
         if result_hour<36:
             if result_hour in range(1,12):
@@ -249,7 +251,7 @@ def add_time(start, duration, weekday=False):
                 else:
                     pass
 
-
+    #return final weekday_result
     weekday_result = weekday_list[final_weekday_position]
 
     if weekday == False:
@@ -257,7 +259,8 @@ def add_time(start, duration, weekday=False):
 
     else:
         new_time = str(result_hour) + ':' + result_minute + " " + time + ', ' + weekday_result + '' + day_result
-
+    
+    #return final result
     return new_time
 
 
