@@ -1,5 +1,6 @@
 class Category:
 
+    #initialize the class Category variable
     def __init__(self,name):
         self.name = name
         self.ledger = []
