@@ -5,6 +5,7 @@ class Category:
         self.name = name
         self.ledger = []
 
+    # create get_balance function to check the remained balance
     def get_balance(self):
         prices = []
         for i in self.ledger:
@@ -12,17 +13,19 @@ class Category:
         total_price = sum(prices)
         return total_price
 
-
+    # create check_funds function to check if the balance is enough to spend
     def check_funds(self,check_amount):
         if self.get_balance() >= check_amount:
             return True
         else:
             return False
 
+    # create deposit function to deposit the money
     def deposit(self, amount, description=''):
         self.ledger.append({"amount": amount, "description": description})
 
 
+    # create withdraw function to withdraw the money
     def withdraw(self, withdraw_amount,description=''):
         if self.check_funds(withdraw_amount)==True:
             self.ledger.append({"amount": -withdraw_amount, "description": description})
@@ -32,7 +35,8 @@ class Category:
             return False
 
 
-
+    # create transfer function to transfer the money
+    # According to perspective, the money can be plus or minus
     def transfer(self, transfer_amount, budget_category=''):
         if self.check_funds(transfer_amount)==True:
             self.withdraw(transfer_amount, description = "Transfer to " + budget_category.name)
@@ -49,7 +53,7 @@ class Category:
         table += f"Total: {format(self.get_balance(), '.2f')}"
         return table
 
-
+    # spend chart to check percentages about spends
 def create_spend_chart(categories):
     names = []
     spents = []
