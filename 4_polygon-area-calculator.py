@@ -1,3 +1,4 @@
+#create a rectangle class
 class Rectangle:
 
     def __init__(self,width,height):
@@ -54,12 +55,13 @@ class Rectangle:
         return time
 
 
-
+# create a square class by inheriting the rectangle class
 class Square(Rectangle):
     def __init__(self,side):
         self.width = side
         self.height = side
 
+# the square has all same length
     def set_side(self,side):
         self.width = side
         self.height = side
@@ -69,8 +71,7 @@ class Square(Rectangle):
         return result
 
 
-cla = Rectangle(8,5)
-print(cla.get_picture())
+
 
 
 
