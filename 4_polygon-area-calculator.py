@@ -44,6 +44,7 @@ class Rectangle:
         result = 'Rectangle(width={0}, height={1})'.format(self.width,self.height)
         return result
 
+    # draw the shape's area
     def get_amount_inside(self,shape):
         initial_result = self.get_area()
         shape_result = shape.get_area()
