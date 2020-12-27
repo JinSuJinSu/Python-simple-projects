@@ -42,6 +42,7 @@ def calculate_demographic_data(print_data=True):
     lower_education = low_education[True]
 
     # percentage with salary >50K
+    # caution : salary's type is not int but string
     higher_education_rich = round(high_education_pay/high_education,1)
     lower_education_rich = round(low_education_pay/low_education,1)
 
