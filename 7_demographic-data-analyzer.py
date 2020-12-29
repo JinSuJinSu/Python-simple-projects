@@ -1,5 +1,4 @@
 import pandas as pd
-from pandas import Series, DataFrame
 
 
 def calculate_demographic_data(print_data=True):
@@ -55,13 +54,25 @@ def calculate_demographic_data(print_data=True):
     rich_percentage = round((min_workers_pay[True]/num_min_workers)*100,1)
 
     # What country has the highest percentage of people that earn >50K?
+    country_df = df.groupby('native-country')['native-country'].count()
+    country_earning_df = df[(df['salary']=='>=50K') | (df['salary']=='>50K')]
+    result_df = country_earning_df.groupby('native-country')['native-country'].count() / country_df
 
+    earning_result = result_df.index.groupby(result_df==result_df.max())
+    final_result = list(earning_result[True])
 
-    highest_earning_country = df.groupby('native-country', sort=False)['native-country'].count()
-    highest_earning_country_percentage = None
+    highest_earning_country = final_result[0]
+    highest_earning_country_percentage = round((result_df.max())*100,1)
 
     # Identify the most popular occupation for those who earn >50K in India.
-    top_IN_occupation = None
+    occupation_df = df[(df['native-country']=='India') & pay_condition]
+    occupation_count = occupation_df.groupby('occupation')['occupation'].count()
+
+    occupation_result = occupation_count.index.groupby(occupation_count==occupation_count.max())
+    top_occupation = list(occupation_result[True])
+    top_IN_occupation = top_occupation[0]
+
+
 
     # DO NOT MODIFY BELOW THIS LINE
 
