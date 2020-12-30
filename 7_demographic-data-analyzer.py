@@ -17,6 +17,7 @@ def calculate_demographic_data(print_data=True):
     total_education = df['education'].count()
     bachelor = df['education'].groupby(df['education']=='Bachelors').count()
 
+    #groupby just show True result so we should finish this method
     percentage_bachelors = round((bachelor[True]/total_education)*100,1)
 
     # What percentage of people with advanced education (`Bachelors`, `Masters`, or `Doctorate`) make more than 50K?
