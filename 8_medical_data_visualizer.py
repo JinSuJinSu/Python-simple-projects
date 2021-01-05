@@ -5,13 +5,73 @@ import numpy as np
 
 # Import data
 df = df = pd.read_csv(r"C:\Users\Administrator\Desktop\medical.txt")
-print(df)
+
 
 
 # Add 'overweight' column
-df['overweight'] = None
 
-# Normalize data by making 0 always good and 1 always bad. If the value of 'cholestorol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
+df['overweight'] = df['weight']/(df['height']/100)**2
+
+
+# Normalize data by making 0 always good and 1 always bad. If the value of 'cholesterol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
+# 1.actice check
+over_active_check = df['active']==1
+normal_active_check = df['active']==0
+
+over_active_df = df[over_active_check]
+normal_active_df = df[normal_active_check]
+
+
+# 2.alco check
+over_alco_check = df['alco']==1
+normal_alco_check = df['alco']==0
+
+over_alco_df = df[over_alco_check]
+normal_alco_df = df[normal_alco_check]
+
+
+# 3. cholesterol check
+over_cholesterol_check = df['cholesterol']>1
+normal_cholesterol_check = df['cholesterol']<=1
+
+over_cholesterol_df = df[over_cholesterol_check]
+normal_cholesterol_df = df[normal_cholesterol_check]
+
+over_cholesterol_df['cholesterol'] = 1
+normal_cholesterol_df['cholesterol'] = 0
+
+
+# 4. gluc check
+over_gluc_check = df['gluc']>1
+normal_gluc_check = df['gluc']<=1
+
+over_gluc_df = df[over_gluc_check]
+normal_gluc_df = df[normal_gluc_check]
+
+over_gluc_df['gluc'] = 1
+normal_gluc_df['gluc'] = 0
+
+
+
+# 5. overweight check
+over_weight_check = df['overweight']>25
+normal_weight_check = df['overweight']<=25
+
+over_weight_df = df[over_weight_check]
+normal_weight_df = df[normal_weight_check]
+
+over_weight_df['overweight'] = 1
+normal_weight_df['overweight'] = 0
+
+
+# 6. smoke check
+over_smoke_check = df['smoke']==1
+normal_smoke_check = df['smoke']==0
+
+over_smoke_df = df[over_smoke_check]
+normal_smoke_df = df[normal_smoke_check]
+
+
 
 
 # Draw Categorical Plot
