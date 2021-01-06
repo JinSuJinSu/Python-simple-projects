@@ -6,78 +6,71 @@ import numpy as np
 # Import data
 df = df = pd.read_csv(r"C:\Users\Administrator\Desktop\medical.txt")
 
-
+pd.set_option('display.max_row', 100)
+pd.set_option('display.max_columns', 15)
 
 # Add 'overweight' column
 
 df['overweight'] = df['weight']/(df['height']/100)**2
 
-
-# Normalize data by making 0 always good and 1 always bad. If the value of 'cholesterol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
-# 1.actice check
-over_active_check = df['active']==1
-normal_active_check = df['active']==0
-
-over_active_df = df[over_active_check]
-normal_active_df = df[normal_active_check]
-
-
-# 2.alco check
-over_alco_check = df['alco']==1
-normal_alco_check = df['alco']==0
-
-over_alco_df = df[over_alco_check]
-normal_alco_df = df[normal_alco_check]
-
-
-# 3. cholesterol check
-over_cholesterol_check = df['cholesterol']>1
-normal_cholesterol_check = df['cholesterol']<=1
-
-over_cholesterol_df = df[over_cholesterol_check]
-normal_cholesterol_df = df[normal_cholesterol_check]
-
-over_cholesterol_df['cholesterol'] = 1
-normal_cholesterol_df['cholesterol'] = 0
-
-
-# 4. gluc check
-over_gluc_check = df['gluc']>1
-normal_gluc_check = df['gluc']<=1
-
-over_gluc_df = df[over_gluc_check]
-normal_gluc_df = df[normal_gluc_check]
-
-over_gluc_df['gluc'] = 1
-normal_gluc_df['gluc'] = 0
-
-
-
-# 5. overweight check
+# 1. overweight check
 over_weight_check = df['overweight']>25
 normal_weight_check = df['overweight']<=25
 
-over_weight_df = df[over_weight_check]
-normal_weight_df = df[normal_weight_check]
+over_weight_df = df[over_weight_check].copy()
+normal_weight_df = df[normal_weight_check].copy()
 
 over_weight_df['overweight'] = 1
 normal_weight_df['overweight'] = 0
 
+result_weight_df = pd.concat([over_weight_df,normal_weight_df])
+weight_df = result_weight_df[['id','overweight']]
 
-# 6. smoke check
-over_smoke_check = df['smoke']==1
-normal_smoke_check = df['smoke']==0
+# Normalize data by making 0 always good and 1 always bad. If the value of 'cholesterol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
 
-over_smoke_df = df[over_smoke_check]
-normal_smoke_df = df[normal_smoke_check]
 
+# 2. cholesterol check
+over_cholesterol_check = df['cholesterol']>1
+normal_cholesterol_check = df['cholesterol']<=1
+
+over_cholesterol_df = df[over_cholesterol_check].copy()
+normal_cholesterol_df = df[normal_cholesterol_check].copy()
+
+over_cholesterol_df['cholesterol'] = 1
+normal_cholesterol_df['cholesterol'] = 0
+
+result_cholesterol_df = pd.concat([over_cholesterol_df,normal_cholesterol_df])
+cholesterol_df = result_cholesterol_df['cholesterol']
+
+
+
+# 3. gluc check
+over_gluc_check = df['gluc']>1
+normal_gluc_check = df['gluc']<=1
+
+over_gluc_df = df[over_gluc_check].copy()
+normal_gluc_df = df[normal_gluc_check].copy()
+
+over_gluc_df['gluc'] = 1
+normal_gluc_df['gluc'] = 0
+
+result_gluc_df = pd.concat([over_gluc_df,normal_gluc_df])
+gluc_df = result_gluc_df['gluc']
+
+
+# active, alco, smoke results
+active_df = df['active']
+alco_df = df['alco']
+smoke_df = df['smoke']
+
+fianl_df = pd.concat([weight_df,cholesterol_df,gluc_df,active_df,alco_df,smoke_df], axis=1)
 
 
 
 # Draw Categorical Plot
 def draw_cat_plot():
     # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
-    df_cat = None
+    df_cat = final_df.melt(id_vars = 'id',value_vars = ['active','alco','cholesterol','gluc','overweight','smoke'])
 
 
     # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the collumns for the catplot to work correctly.
@@ -115,3 +108,5 @@ def draw_heat_map():
     # Do not modify the next two lines
     fig.savefig('heatmap.png')
     return fig
+
+
