@@ -58,27 +58,28 @@ result_gluc_df = pd.concat([over_gluc_df,normal_gluc_df])
 gluc_df = result_gluc_df['gluc']
 
 
-# active, alco, smoke results
+# active, alco, smoke and cardio results
 active_df = df['active']
 alco_df = df['alco']
 smoke_df = df['smoke']
+cardio_df = df['cardio']
 
-fianl_df = pd.concat([weight_df,cholesterol_df,gluc_df,active_df,alco_df,smoke_df], axis=1)
+final_df = pd.concat([active_df,alco_df,cholesterol_df,gluc_df,weight_df,smoke_df,cardio_df], axis=1)
+
+
 
 
 
 # Draw Categorical Plot
 def draw_cat_plot():
     # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
-    df_cat = final_df.melt(id_vars = 'id',value_vars = ['active','alco','cholesterol','gluc','overweight','smoke'])
-
-
     # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the collumns for the catplot to work correctly.
-    df_cat = None
-
+   
+    df_cat = pd.melt(final_df, id_vars=['id', 'cardio'])
+    
     # Draw the catplot with 'sns.catplot()'
 
-
+    fig = sns.catplot(x="variable", hue="value", col="cardio", data=df_cat, kind="count")
 
     # Do not modify the next two lines
     fig.savefig('catplot.png')
