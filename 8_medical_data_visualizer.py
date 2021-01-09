@@ -64,6 +64,8 @@ alco_df = df['alco']
 smoke_df = df['smoke']
 cardio_df = df['cardio']
 
+
+# create a data frame to draw plot
 final_df = pd.concat([active_df,alco_df,cholesterol_df,gluc_df,weight_df,smoke_df,cardio_df], axis=1)
 
 
