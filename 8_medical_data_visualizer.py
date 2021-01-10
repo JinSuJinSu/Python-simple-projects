@@ -59,6 +59,7 @@ gluc_df = result_gluc_df['gluc']
 
 
 # active, alco, smoke and cardio results
+# It is just for data merge
 active_df = df['active']
 alco_df = df['alco']
 smoke_df = df['smoke']
